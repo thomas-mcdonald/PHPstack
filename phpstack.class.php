@@ -77,7 +77,7 @@ class PHPstack {
 	 * 	public
 	 *
 	 * 	Parameters:
-     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the answer(s)
+     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the comments(s)
 	 * 	opt - _array_ (Optional) Associative array of parameters which can have the following keys:
 	 *
      * Keys for the $opt parameter:
@@ -100,43 +100,152 @@ class PHPstack {
         return $this->request('answers/' . $id . '/comments', $opt);
     }
 
-    function getBadges() {
+    /**
+	 * Method: getAllBadges()
+	 * 	Gets all standard, non-tag-based badges in alphabetical order. 
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
+    function getAllBadges() {
         $opt = array();
         
         return $this->request('badges/name', $opt);
     }
 
-    function getBadge($id, $opt = NULL) {
+    /**
+	 * Method: getBadges()
+	 * 	Gets the users that have been awarded the badge identified by 'id'. 
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * 	Parameters:
+     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the answer(s)
+	 * 	opt - _array_ (Optional) Associative array of parameters which can have the following keys:
+	 *
+     * Keys for the $opt parameter:
+     *  fromdate - _integer_ (Optional) Unix timestamp of the minimum creation date on a returned item.
+     *  todate - _integer_ (Optional) Unix timestamp of the maximum creation date on a returned item.
+     *  page - _integer_ (Optional) The pagination offset for the current collection. Affected by the specified pagesize.
+     *  pagesize - _integer_ (Optional) The number of collection results to display during pagination. Should be between 1 and 100 inclusive.
+     *
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
+    function getBadges($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
         return $this->request('badges/' . $id, $opt);
     }
 
+     /**
+	 * Method: getAllBadges()
+	 * 	Gets all tag-based badges in alphabetical order.
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
     function getTagBadges() {
         $opt = array();
 
         return $this->request('badges/tags', $opt);
     }
 
-    function getComment($id, $opt = NULL) {
+    /**
+	 * Method: getComments()
+	 * 	Gets the comments associated with a set of answers.
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * 	Parameters:
+     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the comment(s)
+	 * 	opt - _array_ (Optional) Associative array of parameters which can have the following keys:
+	 *
+     * Keys for the $opt parameter:
+     *  sort - _string_ (Optional) How a collection should be sorted. Allowed values are "activity", "creation", "views" or "votes". Default is activity.
+     *  order - _string_ (Optional) How the current sort should be ordered, either "asc" or "desc". Default is desc.
+	 *  min - _integer_ (Optional) Minimum of the range to include in the response according to the current sort.
+     *  max - _integer_ (Optional) Maximum of the range to include in the response according to the current sort.
+     *  fromdate - _integer_ (Optional) Unix timestamp of the minimum creation date on a returned item.
+     *  todate - _integer_ (Optional) Unix timestamp of the maximum creation date on a returned item.
+     *  page - _integer_ (Optional) The pagination offset for the current collection. Affected by the specified pagesize.
+     *  pagesize - _integer_ (Optional) The number of collection results to display during pagination. Should be between 1 and 100 inclusive.
+     *
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
+    function getComments($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
         return $this->request('comments/' . $id, $opt);
     }
 
+    /**
+	 * Method: getComments()
+	 * 	Simulates an error given a code.
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * 	Parameters:
+     *  id - _integer_ (Required) ID of the error to simulate
+     * 
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
     function getError($id) {
         $opt = array();
 
         return $this->request('errors/' . $id, $opt);
     }
 
-    function getQuestions($opt = NULL) {
+    /**
+	 * Method: getQuestionsSummary()
+	 * 	Gets question summary information. 
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * 	Parameters:
+     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the comment(s)
+	 * 	opt - _array_ (Optional) Associative array of parameters which can have the following keys:
+	 *
+     * Keys for the $opt parameter:
+     *  tagged - _string_ (Optional) List of tags questions must have.
+     *  body - _boolean_ (Optional) When true, a post's body will be included in the response. Default is false.
+     *  sort - _string_ (Optional) How a collection should be sorted. Allowed values are "activity", "creation", "views" or "votes". Default is activity.
+     *  order - _string_ (Optional) How the current sort should be ordered, either "asc" or "desc". Default is desc.
+	 *  min - _integer_ (Optional) Minimum of the range to include in the response according to the current sort.
+     *  max - _integer_ (Optional) Maximum of the range to include in the response according to the current sort.
+     *  fromdate - _integer_ (Optional) Unix timestamp of the minimum creation date on a returned item.
+     *  todate - _integer_ (Optional) Unix timestamp of the maximum creation date on a returned item.
+     *  page - _integer_ (Optional) The pagination offset for the current collection. Affected by the specified pagesize.
+     *  pagesize - _integer_ (Optional) The number of collection results to display during pagination. Should be between 1 and 100 inclusive.
+     *
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
+    function getQuestionsSummary($opt = NULL) {
         if(!$opt) $opt = array();
 
         return $this->request('questions', $opt);
     }
 
-    function getQuestion($id, $opt = NULL) {
+    function getQuestions($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
         return $this->request('questions/' . $id, $opt);
@@ -196,13 +305,13 @@ class PHPstack {
         return $this->request('tags', $opt);
     }
 
-    function getUsers($opt = NULL) {
+    function getUsersSummary($opt = NULL) {
         if(!$opt) $opt = array();
 
         return $this->request('users', $opt);
     }
 
-    function getUser($id, $opt = NULL) {
+    function getUsers($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
         return $this->request('users/' . $id, $opt);
