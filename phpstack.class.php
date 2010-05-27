@@ -35,12 +35,65 @@ class PHPstack {
         $this->key = $key;
     }
 
-    function getAnswer($id, $opt = NULL) {
+
+    /**
+	 * Method: getAnswers()
+	 * 	Gets an answer, or set of answers,  by their IDs.
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * 	Parameters:
+     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the answer(s)
+	 * 	opt - _array_ (Optional) Associative array of parameters which can have the following keys:
+	 *
+     * Keys for the $opt parameter:
+     *  body - _boolean_ (Optional) When true, a post's body will be included in the response. Default is false.
+     *  comments - _boolean_ (Optional) When true, any comments on a post will be included in the response. Default is false.
+     *  sort - _string_ (Optional) How a collection should be sorted. Allowed values are "activity", "creation", "views" or "votes". Default is activity.
+     *  order - _string_ (Optional) How the current sort should be ordered, either "asc" or "desc". Default is desc.
+	 *  min - _integer_ (Optional) Minimum of the range to include in the response according to the current sort.
+     *  max - _integer_ (Optional) Maximum of the range to include in the response according to the current sort.
+     *  fromdate - _integer_ (Optional) Unix timestamp of the minimum creation date on a returned item.
+     *  todate - _integer_ (Optional) Unix timestamp of the maximum creation date on a returned item.
+     *  page - _integer_ (Optional) The pagination offset for the current collection. Affected by the specified pagesize.
+     *  pagesize - _integer_ (Optional) The number of collection results to display during pagination. Should be between 1 and 100 inclusive.
+     *
+	 * Returns:
+	 * 	<ResponseCore> object
+     * 
+	 */
+    function getAnswers($id, $opt = NULL) {
         if (!$opt) $opt = array();
 
         return $this->request('answers/' . $id, $opt);
     }
 
+     /**
+	 * Method: getAnswerComments()
+	 * 	Gets the comments associated with a set of answers. 
+	 *
+	 * Access:
+	 * 	public
+	 *
+	 * 	Parameters:
+     *  id - _integer_ (Required) A single primary key identifier or a vectorized, semicolon-delimited list of identifiers for the answer(s)
+	 * 	opt - _array_ (Optional) Associative array of parameters which can have the following keys:
+	 *
+     * Keys for the $opt parameter:
+     *  sort - _string_ (Optional) How a collection should be sorted. Allowed values are "activity", "creation", "views" or "votes". Default is activity.
+     *  order - _string_ (Optional) How the current sort should be ordered, either "asc" or "desc". Default is desc.
+	 *  min - _integer_ (Optional) Minimum of the range to include in the response according to the current sort.
+     *  max - _integer_ (Optional) Maximum of the range to include in the response according to the current sort.
+     *  fromdate - _integer_ (Optional) Unix timestamp of the minimum creation date on a returned item.
+     *  todate - _integer_ (Optional) Unix timestamp of the maximum creation date on a returned item.
+     *  page - _integer_ (Optional) The pagination offset for the current collection. Affected by the specified pagesize.
+     *  pagesize - _integer_ (Optional) The number of collection results to display during pagination. Should be between 1 and 100 inclusive.
+     *
+	 * Returns:
+	 * 	<ResponseCore> object
+     *
+	 */
     function getAnswerComments($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
@@ -223,8 +276,9 @@ class PHPstack {
 
         $request->send_request();
         $headers = $request->get_response_header();
-
-		$data = new ResponseCore($headers, $request->get_response_body(), $request->get_response_code());
+        $jsonbody = $request->get_response_body();
+        $body = json_decode($jsonbody);
+		$data = new ResponseCore($headers, $body, $request->get_response_code());
         return $data;
     }
 }
