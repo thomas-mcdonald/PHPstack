@@ -25,7 +25,7 @@ class PHPstack {
 
     var $url;
     
-    function __construct($url, $key = NULL) {
+    function __construct($url, $key) {
         if(is_string($url)) {
             $this->url = $url;
         } else {
@@ -216,9 +216,7 @@ class PHPstack {
     }
 
     function request($call, $opt) {
-        if($this->key !== NULL) {
-            $opt = array_merge($opt, array('key' => $this->key));
-        }
+        $opt = array_merge($opt, array('key' => $this->key));
         $query = http_build_query($opt, '', '&');
         $request = new RequestCore('http://api.' . $this->url . '/' . API_VERSION . '/' . $call . '?' . $query);
         $request->set_useragent(PHPSTACK_USERAGENT);
