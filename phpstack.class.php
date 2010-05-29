@@ -4,7 +4,7 @@
  * 	StackExchange API (http://stackapps.com)
  *
  * Version:
- * 	2010.05.27
+ * 	2010.05.29
  *
  * Copyright:
  * 	2010 Thomas McDonald, and contributors.
@@ -13,16 +13,25 @@
  * 	Simplified BSD License - http://opensource.org/licenses/bsd-license.php
  *
  * See Also:
+ *  (In Progress) Online documentation - http://conceptcoding.co.uk/phpstack
  */
 
 define('API_VERSION', '0.8');
 
-define('PHPSTACK_USERAGENT', 'PHPstack 0.1');
+define('PHPSTACK_USERAGENT', 'PHPstack 1');
 
 class PHPstack {
 
+    /**
+     * Property: Key
+     * The Stack Exchange API key. Used in all requests.
+     */
     var $key;
 
+    /**
+     * Property: URL
+     * The URL of the Stack Exchange site we are querying
+     */
     var $url;
     
     function __construct($url, $key) {
