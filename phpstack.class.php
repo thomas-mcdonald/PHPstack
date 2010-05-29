@@ -29,10 +29,14 @@ class PHPstack {
         if(is_string($url)) {
             $this->url = $url;
         } else {
-            die('No URL was specified');
+            die('An invalid URL was specified');
         }
 
-        $this->key = $key;
+        if(!empty($key)) {
+            $this->key = $key;
+        } else {
+            die('An invalid API key was provided');
+        }
     }
 
 
