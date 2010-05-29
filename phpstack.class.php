@@ -384,6 +384,17 @@ class PHPstack {
     }
 
     function request($call, $opt) {
+        /* We need to loop through each option and if a boolean true/false is used
+           convert it to a string true/false, otherwise http_build_array will use
+           them to 1's and 0's, which makes the API return a 500 Internal Server Error. */
+        foreach($opt as &$option) {
+            if($option === true) {
+                $option = 'true';
+            } elseif($option === false) {
+                $option = 'false';
+            }
+        }
+
         $opt = array_merge($opt, array('key' => $this->key));
         $query = http_build_query($opt, '', '&');
         $request = new RequestCore('http://api.' . $this->url . '/' . API_VERSION . '/' . $call . '?' . $query);
@@ -393,7 +404,7 @@ class PHPstack {
         $headers = $request->get_response_header();
         $jsonbody = $request->get_response_body();
         $body = json_decode($jsonbody);
-		$data = new ResponseCore($headers, $body, $request->get_response_code());
+        $data = new ResponseCore($headers, $body, $request->get_response_code());
         return $data;
     }
 }
