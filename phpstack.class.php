@@ -4,7 +4,7 @@
  * 	StackExchange API (http://stackapps.com)
  *
  * Version:
- * 	2010.05.29
+ * 	2010.05.30
  *
  * Copyright:
  * 	2010 Thomas McDonald, and contributors.
@@ -33,6 +33,12 @@ class PHPstack {
      * The URL of the Stack Exchange site we are querying
      */
     var $url;
+
+    /**
+     * Property: Useragent
+     * The useragent used by CURL for all requests
+     */
+    var $useragent;
     
     function __construct($url, $key) {
         if(is_string($url)) {
@@ -47,6 +53,28 @@ class PHPstack {
             trigger_error("An invalid API key was provided", E_USER_ERROR);
         }
 
+        $this->useragent = PHPSTACK_USERAGENT;
+
+        return true;
+    }
+
+
+    /**
+     * Method: setUseragent()
+     *  Sets the useragent used by CURL
+     *
+     * Access:
+     *  public
+     *
+     * Parameters:
+     *  ua - _string_ (Required) The useragent you wish to use.
+     *
+     * Returns:
+     *  true on success
+     *
+     */
+    function setUseragent($ua) {
+        $this->useragent = '(PHPstack) ' . $ua;
         return true;
     }
 
@@ -495,7 +523,7 @@ class PHPstack {
         $opt = array_merge($opt, array('key' => $this->key));
         $query = http_build_query($opt, '', '&');
         $request = new RequestCore('http://api.' . $this->url . '/' . API_VERSION . '/' . $call . '?' . $query);
-        $request->set_useragent(PHPSTACK_USERAGENT);
+        $request->set_useragent($this->useragent);
 
         $request->send_request();
         $headers = $request->get_response_header();
