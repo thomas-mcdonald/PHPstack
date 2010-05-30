@@ -508,7 +508,23 @@ class PHPstack {
         return $this->request('users/' . $id . '/tags', $opt);
     }
 
-    function request($call, $opt) {
+
+    /**
+     * Method: request()
+     * 	Handles the requests to the Stack Exchange API
+     *
+     * Access:
+     * 	private
+     *
+     * 	Parameters:
+     *  call - _string_ (Required) The API method to call
+     * 	opt - _array_ (Optional) Associative array of parameters, used to build the query part of the URL
+     *
+     * Returns:
+     * 	<ResponseCore> object
+     *
+     */
+     private function request($call, $opt) {
         /* We need to loop through each option and if a boolean true/false is used
            convert it to a string true/false, otherwise http_build_array will use
            them to 1's and 0's, which makes the API return a 500 Internal Server Error. */
@@ -520,6 +536,7 @@ class PHPstack {
             }
         }
 
+        /* merge the users API key into the options array */
         $opt = array_merge($opt, array('key' => $this->key));
         $query = http_build_query($opt, '', '&');
         $request = new RequestCore('http://api.' . $this->url . '/' . API_VERSION . '/' . $call . '?' . $query);
