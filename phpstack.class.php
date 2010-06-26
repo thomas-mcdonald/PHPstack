@@ -4,7 +4,7 @@
  * 	StackExchange API (http://stackapps.com)
  *
  * Version:
- * 	2010.05.30
+ * 	2010.06.26
  *
  * Copyright:
  * 	2010 Thomas McDonald, and contributors.
@@ -16,7 +16,7 @@
  *  (In Progress) Online documentation - http://conceptcoding.co.uk/phpstack
  */
 
-define('API_VERSION', '0.8');
+define('API_VERSION', '0.9');
 
 define('PHPSTACK_USERAGENT', 'PHPstack 1');
 
