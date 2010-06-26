@@ -4,7 +4,7 @@
  * 	StackExchange API (http://stackapps.com)
  *
  * Version:
- * 	2010.06.26
+ * 	2010.06.26 (1.0)
  *
  * Copyright:
  * 	2010 Thomas McDonald, and contributors.
@@ -18,7 +18,7 @@
 
 define('API_VERSION', '0.9');
 
-define('PHPSTACK_USERAGENT', 'PHPstack 1');
+define('PHPSTACK_USERAGENT', 'PHPstack');
 
 class PHPstack {
 
@@ -34,13 +34,7 @@ class PHPstack {
      */
     var $url;
 
-    /**
-     * Property: Useragent
-     * The useragent used by CURL for all requests
-     */
-    var $useragent;
-    
-    function __construct($url, $key) {
+   function __construct($url, $key) {
         if(is_string($url)) {
             $this->url = $url;
         } else {
@@ -53,31 +47,8 @@ class PHPstack {
             trigger_error("An invalid API key was provided", E_USER_ERROR);
         }
 
-        $this->useragent = PHPSTACK_USERAGENT;
-
         return true;
     }
-
-
-    /**
-     * Method: setUseragent()
-     *  Sets the useragent used by CURL
-     *
-     * Access:
-     *  public
-     *
-     * Parameters:
-     *  ua - _string_ (Required) The useragent you wish to use.
-     *
-     * Returns:
-     *  true on success
-     *
-     */
-    function setUseragent($ua) {
-        $this->useragent = '(PHPstack) ' . $ua;
-        return true;
-    }
-
 
     /**
 	 * Method: getAnswers()
