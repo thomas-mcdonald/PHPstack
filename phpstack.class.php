@@ -4,7 +4,7 @@
  * 	StackExchange API (http://stackapps.com)
  *
  * Version:
- * 	2010.06.26 (1.0)
+ * 	2010.06.26 (1.1)
  *
  * Copyright:
  * 	2010 Thomas McDonald, and contributors.
@@ -389,6 +389,20 @@ class PHPstack {
         return $this->request('users/' . $id . '/tags', $opt);
     }
 
+    function search($opt) {
+        return $this->request('search', $opt);
+    }
+
+    /* SA-related methods */
+
+    function sites() {
+        return $this->authrequest('sites');
+    }
+
+    function getAssociatedUserAccounts($id) {
+        return $this->authrequest('users/' . $id . '/associated');
+    }
+
 
     /**
      * Method: request()
@@ -426,6 +440,20 @@ class PHPstack {
         $request->send_request();
         $headers = $request->get_response_header();
         $jsonbody = $request->get_response_body();
+        $body = json_decode($jsonbody);
+        $data = new ResponseCore($headers, $body, $request->get_response_code());
+        return $data;
+    }
+
+    /** Used for the stackauth endpoint */
+    private function authrequest($call) {
+        $request = new RequestCore('http://stackauth.com/' . API_VERSION . '/' . $call . '?key=' . $this->key);
+        $request->set_useragent($this->useragent);
+
+        $request->send_request();
+        $headers = $request->get_response_header();
+        $jsonbody = $request->get_response_body();
+
         $body = json_decode($jsonbody);
         $data = new ResponseCore($headers, $body, $request->get_response_code());
         return $data;
