@@ -108,11 +108,6 @@ class PHPstack {
 	 */
     function getAnswers($id, $opt = NULL) {
         if (!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The answer ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('answers/' . $id, $opt);
     }
 
@@ -143,11 +138,6 @@ class PHPstack {
 	 */
     function getAnswerComments($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The answer ID must be numeric");
-        }
-
         return $this->request('answers/' . $id . '/comments', $opt);
     }
 
@@ -191,10 +181,6 @@ class PHPstack {
 	 */
     function getBadges($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The badge ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('badges/' . $id, $opt);
     }
@@ -244,10 +230,6 @@ class PHPstack {
     function getComments($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The comment ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('comments/' . $id, $opt);
     }
 
@@ -267,10 +249,6 @@ class PHPstack {
 	 */
     function getError($id) {
         $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The error ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('errors/' . $id, $opt);
     }
@@ -311,19 +289,11 @@ class PHPstack {
     function getQuestions($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The question ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('questions/' . $id, $opt);
     }
 
     function getQuestionAnswers($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The question ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('questions/' . $id . '/answers', $opt);
     }
@@ -331,19 +301,11 @@ class PHPstack {
     function getQuestionComments($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The question ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('questions/' . $id . '/comments', $opt);
     }
 
     function getQuestionTimeline($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The question ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('questions/' . $id . '/timeline', $opt);
     }
@@ -363,19 +325,11 @@ class PHPstack {
     function getRevisions($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The question ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('revisions/' . $id, $opt);
     }
 
     function getRevision($id, $guid, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The question ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('revisions/' . $id . '/' . $guid, $opt);
     }
@@ -401,19 +355,11 @@ class PHPstack {
     function getUsers($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('users/' . $id, $opt);
     }
 
     function getUsersAnswers($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('users/' . $id . '/answers', $opt);
     }
@@ -421,19 +367,11 @@ class PHPstack {
     function getUsersBadges($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('users/' . $id . '/badges', $opt);
     }
 
     function getUsersComments($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('users/' . $id . '/comments', $opt);
     }
@@ -441,19 +379,11 @@ class PHPstack {
     function getUsersCommentsTo($id, $toid, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('users/' . $id . '/commnets/' . $toid, $opt);
     }
 
     function getUsersFavourites($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('users/' . $id . '/favourites', $opt);
     }
@@ -461,19 +391,11 @@ class PHPstack {
     function getUsersMentions($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('users/' . $id . '/mentioned', $opt);
     }
 
     function getUsersQuestions($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('users/' . $id . '/questions', $opt);
     }
@@ -481,29 +403,17 @@ class PHPstack {
     function getUsersReputation($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('users/' . $id . '/reputation', $opt);
     }
 
     function getUsersTags($id, $opt = NULL) {
         if(!$opt) $opt = array();
 
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
-
         return $this->request('users/' . $id . '/tags', $opt);
     }
 
     function getUsersTimeline($id, $opt = NULL) {
         if(!$opt) $opt = array();
-
-        if(!is_numeric($id)) {
-            trigger_error("The user ID must be numeric", E_USER_ERROR);
-        }
 
         return $this->request('users/' . $id . '/tags', $opt);
     }
