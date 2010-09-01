@@ -16,9 +16,7 @@
  *  (In Progress) Online documentation - http://conceptcoding.co.uk/phpstack
  */
 
-define('API_VERSION', '0.9');
-
-define('PHPSTACK_USERAGENT', 'PHPstack');
+define('API_VERSION', '1.0');
 
 class PHPstack {
 
@@ -36,6 +34,7 @@ class PHPstack {
 
    function __construct($url, $key) {
         if(is_string($url)) {
+        	// TODO: Allow for URLS in different formats - eg. api.stack.com, http://api.stack.com, stack.com, http://stack.com. Currently the function only works with stack.com.
             $this->url = $url;
         } else {
             trigger_error("An invalid URL was specified", E_USER_ERROR);
@@ -435,7 +434,6 @@ class PHPstack {
         $opt = array_merge($opt, array('key' => $this->key));
         $query = http_build_query($opt, '', '&');
         $request = new RequestCore('http://api.' . $this->url . '/' . API_VERSION . '/' . $call . '?' . $query);
-        $request->set_useragent($this->useragent);
 
         $request->send_request();
         $headers = $request->get_response_header();
@@ -448,7 +446,6 @@ class PHPstack {
     /** Used for the stackauth endpoint */
     private function authrequest($call) {
         $request = new RequestCore('http://stackauth.com/' . API_VERSION . '/' . $call . '?key=' . $this->key);
-        $request->set_useragent($this->useragent);
 
         $request->send_request();
         $headers = $request->get_response_header();
