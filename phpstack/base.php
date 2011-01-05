@@ -20,7 +20,7 @@ class PHPStack {
 	}
 		
 	public function update_sites() {
-		$raw_api = $this->request("http://stackauth.com/1.0/sites?key=" . $this->key);
+		$raw_api = $this->request("http://stackauth.com/" . SE_API_VERSION . "/sites?key=" . $this->key);
 		$api_sites = $raw_api->api_sites;
 		$sites = array();
 		
