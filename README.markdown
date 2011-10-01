@@ -1,4 +1,4 @@
-#PHPStack
+#PHPStack [![looking for maintainer](http://stillmaintained.com/thomas-mcdonald/PHPstack.png)](http://stillmaintained.com/thomas-mcdonald/PHPstack)
 
 A new version is in development on the master branch. The currently released version of PHPStack can be found
 [https://github.com/conceptcoding/PHPStack/tree/1.1](here "PHPStack 1.1").
